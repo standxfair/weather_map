@@ -1,5 +1,6 @@
 .App {
-  text-align: center;
+  /* text-align: center; */
+  /* display: flex; */
 }
 
 .App-logo {
@@ -38,7 +39,18 @@
   }
 }
 
-.map_container {
-  /* min-height: 1000px; */
-  background-color: #282c34;
+.container {
+  display: flex;
+  background: #dbdee2;
+  min-height: 22rem;
+}
+
+.info {
+  padding: 1rem;
+  flex: 3;
+}
+
+.history {
+  padding: 1rem;
+  flex: 1;
 }

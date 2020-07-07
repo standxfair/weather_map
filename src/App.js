@@ -8,12 +8,11 @@ import History from './components/History';
 function App() {
   return (
     <div className="App">
-      {/* <header className="App-header">
-
-      </header> */}
       <WeatherMap />
-      <WeatherInfo />
-      <History />
+      <div className="container">
+        <WeatherInfo />
+        <History />
+      </div>
     </div>
   );
 }

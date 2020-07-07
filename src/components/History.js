@@ -1,6 +1,8 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { putData, clearPointData } from '../actions/pointActions';
+import { deleteHistoryItem } from '../actions/historyActions'
+
 
 const History = () => {
   const historyData = useSelector((state => state.history))
@@ -12,16 +14,24 @@ const History = () => {
     dispatch(putData(historyData[idx]))
   }
 
+  const deleteHandler = (idx) => (ev) => {
+    ev.stopPropagation()
+    dispatch(deleteHistoryItem([idx]))
+  }
+
   if (historyData.length) {
-    return <ul>
-      {historyData.map((item, key) => (key !== historyData.length - 1) &&
-        <li
-          key={key}
-          onClick={clickHandler(key)}
-        >
-          {item.name}
-        </li>)}
-    </ul>
+    return <div className="history">
+      <ul>
+        {historyData.map((item, key) => (key !== historyData.length - 1) &&
+          <li
+            key={key}
+            onClick={clickHandler(key)}
+          >
+            {item.name}
+            <span onClick={deleteHandler(key)} className="history__delete">x</span>
+          </li>)}
+      </ul>
+    </div>
   } else {
     return null
   }
