@@ -27,8 +27,10 @@ const History = () => {
             key={key}
             onClick={clickHandler(key)}
           >
-            {item.name}
-            <span onClick={deleteHandler(key)} className="history__delete">x</span>
+            <span className="history__item">
+              {item.name}
+              <span onClick={deleteHandler(key)} className="history__delete">&#10006;</span>
+            </span>
           </li>)}
       </ul>
     </div>
