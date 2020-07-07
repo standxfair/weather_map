@@ -1,20 +1,29 @@
 import React, { useState } from 'react';
 import { YMaps, Map, Placemark } from 'react-yandex-maps';
-import { GET_WEATHER_URL, WEATHER_ICON_URL } from '../constants/api'
+import { WEATHER_ICON_URL } from '../constants/api'
 import { convertUnixTime } from '../helpers/dateTime';
+import { useDispatch, useSelector } from 'react-redux'
+import { LoadData } from '../actions/pointActions'
+
 
 const WeatherMap = () => {
-  const [mapState, setMapState] = useState({
+  const [mapState] = useState({
     center: [55.75, 37.57],
     zoom: 10,
     type: 'yandex#map',
     controls: ['zoomControl', 'fullscreenControl'],
   })
-  const [pointCoords, setPointCoords] = useState(null)
+
+  const dispatch = useDispatch()
+
+  const pointData = useSelector(state => state.point)
+  const pointCoords = useSelector(state => state.point.coord)
+
 
   const onMapClickHandler = (ev) => {
     const { _sourceEvent: { originalEvent: { coords } } } = ev
-    setPointCoords(coords)
+
+    dispatch(LoadData(coords[0], coords[1]))
   }
 
   const makeBaloonContent = (main, weather, dt) => (
@@ -48,16 +57,10 @@ const WeatherMap = () => {
                 }}
                 modules={['geoObject.addon.balloon']}
                 onClick={async (ev) => {
-                  await fetch(GET_WEATHER_URL + `&lat=${pointCoords[0]}&lon=${pointCoords[1]}`)
-                    .then((response) => response.json())
-                    .then(result => {
-                      console.log(result)
-                      ev.originalEvent.target.properties.set({
-                        balloonContentHeader: result.name,
-                        balloonContentBody: makeBaloonContent(result.main, result.weather[0], result.dt)
-                      })
-                    })
-
+                  ev.originalEvent.target.properties.set({
+                    balloonContentHeader: pointData.name,
+                    balloonContentBody: makeBaloonContent(pointData.main, pointData.weather[0], pointData.dt)
+                  })
                 }}
               />
             )

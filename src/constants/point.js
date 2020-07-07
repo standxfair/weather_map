@@ -1,0 +1,2 @@
+export const SET_POINT_DATA = 'SET_POINT_DATA'
+export const LOAD_POINT_DATA = 'LOAD_POINT_DATA'
