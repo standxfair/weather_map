@@ -3,7 +3,7 @@ import { YMaps, Map, Placemark } from 'react-yandex-maps';
 import { WEATHER_ICON_URL } from '../constants/api'
 import { convertUnixTime } from '../helpers/dateTime';
 import { useDispatch, useSelector } from 'react-redux'
-import { LoadData } from '../actions/pointActions'
+import { loadData } from '../actions/pointActions'
 
 
 const WeatherMap = () => {
@@ -23,7 +23,7 @@ const WeatherMap = () => {
   const onMapClickHandler = (ev) => {
     const { _sourceEvent: { originalEvent: { coords } } } = ev
 
-    dispatch(LoadData(coords[0], coords[1]))
+    dispatch(loadData(coords[0], coords[1]))
   }
 
   const makeBaloonContent = (main, weather, dt) => (

@@ -1,11 +1,13 @@
 export const formatCoords = (serverData) => {
   let data = { ...serverData }
-  let coords = []
 
-  coords.push(data.coord.lat)
-  coords.push(data.coord.lon)
+  if (data.coord.lat) {
+    let coords = []
+    coords.push(data.coord.lat)
+    coords.push(data.coord.lon)
 
-  data.coord = coords
+    data.coord = coords
+  }
 
   return data
 }

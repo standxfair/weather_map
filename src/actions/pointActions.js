@@ -1,4 +1,4 @@
-import { SET_POINT_DATA, LOAD_POINT_DATA } from '../constants/point';
+import { SET_POINT_DATA, LOAD_POINT_DATA, CLEAR_POINT_DATA } from '../constants/point';
 import { formatCoords } from '../helpers/point';
 
 export const putData = (data) => {
@@ -8,9 +8,17 @@ export const putData = (data) => {
   }
 }
 
-export const LoadData = (lat, lon) => {
+export const loadData = (lat, lon) => {
   return {
     type: LOAD_POINT_DATA,
     payload: [lat, lon]
+  }
+}
+
+
+export const clearPointData = () => {
+  return {
+    type: CLEAR_POINT_DATA,
+    payload: {}
   }
 }
