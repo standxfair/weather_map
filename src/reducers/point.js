@@ -6,14 +6,7 @@ const initialState = update({}, { $merge: {} });
 const point = (state = initialState, action) => {
   switch (action.type) {
     case SET_POINT_DATA:
-      let data = { ...action.payload }
-
-      let coords = []
-      coords.push(data.coord.lat)
-      coords.push(data.coord.lon)
-      data.coord = coords
-
-      return update(state, { $set: data })
+      return update(state, { $set: action.payload })
 
     default:
       break

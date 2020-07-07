@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import WeatherMap from './components/Map'
+import WeatherInfo from './components/WeatherInfo';
 
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
 
       </header> */}
       <WeatherMap />
+      <WeatherInfo />
     </div>
   );
 }

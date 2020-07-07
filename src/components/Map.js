@@ -43,7 +43,7 @@ const WeatherMap = () => {
         <Map
           defaultState={mapState}
           width='100%'
-          height='700px'
+          height='600px'
           modules={['control.ZoomControl', 'control.FullscreenControl', 'templateLayoutFactory', 'ObjectManager', 'geocode',]}
           onClick={onMapClickHandler}
         >
