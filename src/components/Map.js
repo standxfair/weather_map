@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { YMaps, Map, Placemark } from 'react-yandex-maps';
 import { WEATHER_ICON_URL } from '../constants/api'
 import { convertUnixTime } from '../helpers/dateTime';
@@ -7,7 +7,7 @@ import { loadData } from '../actions/pointActions'
 
 
 const WeatherMap = () => {
-  const [mapState] = useState({
+  const [mapState, setMapState] = useState({
     center: [55.75, 37.57],
     zoom: 10,
     type: 'yandex#map',
@@ -19,6 +19,11 @@ const WeatherMap = () => {
   const pointData = useSelector(state => state.point)
   const pointCoords = useSelector(state => state.point.coord)
 
+  useEffect(() => {
+    if (pointCoords) {
+      setMapState({ ...mapState, center: pointCoords })
+    }
+  }, [pointCoords])
 
   const onMapClickHandler = (ev) => {
     const { _sourceEvent: { originalEvent: { coords } } } = ev
@@ -41,11 +46,11 @@ const WeatherMap = () => {
     <div className="map_container">
       <YMaps>
         <Map
-          defaultState={mapState}
+          state={mapState}
           width='100%'
-          height='600px'
           modules={['control.ZoomControl', 'control.FullscreenControl', 'templateLayoutFactory', 'ObjectManager', 'geocode',]}
           onClick={onMapClickHandler}
+          className="yamap"
         >
           {pointCoords
             ? (
@@ -61,10 +66,15 @@ const WeatherMap = () => {
                     balloonContentHeader: pointData.name,
                     balloonContentBody: makeBaloonContent(pointData.main, pointData.weather[0], pointData.dt)
                   })
+
+                  // await fetch('../constants/city.list.json')
+                  // .then(response => {console.log(response)})
+
                 }}
               />
             )
             : null}
+
         </Map>
       </YMaps>
     </div>

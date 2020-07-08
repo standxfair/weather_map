@@ -7,7 +7,6 @@
 .info {
   padding: 1rem;
   flex: 2;
-
 }
 
 .info__card {
@@ -16,6 +15,7 @@
   background-color: #ffffff;
   padding: 1rem;
 }
+
 
 .info__card h2 {
   margin: 0;
@@ -69,5 +69,52 @@
 
 .history>ul>li {
   margin: 1rem;
+}
+
+.yamap {
+  height: 600px;
+}
+
+.search {
+  position: absolute;
+  top: 1rem;
+  left: 2.5rem;
+}
+
+.search__sugest_input {
+  font-size: 1.2rem;
+  border: 1px solid #445ff8;
+  padding: .5rem;
+}
+
+.search__sugest_list {
+  background: #ffffff;
+  margin: 0;
+  padding: .5rem;
+}
+
+.search__sugest_list li {
+  list-style: none;
+  line-height: 1.5rem;
+  cursor: pointer;
+}
+
+@media(max-width: 600px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .info__card {
+    width: 100%;
+    padding: .3rem;
+  }
+
+  .history {
+    padding: 0;
+  }
+
+  .history>ul {
+    padding: 0;
+  }
 
 }
