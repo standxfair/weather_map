@@ -7,6 +7,7 @@ import { loadData } from '../actions/pointActions'
 
 
 const WeatherMap = () => {
+
   const [mapState, setMapState] = useState({
     center: [55.75, 37.57],
     zoom: 10,
@@ -18,6 +19,21 @@ const WeatherMap = () => {
 
   const pointData = useSelector(state => state.point)
   const pointCoords = useSelector(state => state.point.coord)
+
+  useEffect(() => {
+    const successUserGeoposition = (position) => {
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
+
+      setMapState({ ...mapState, center: [latitude, longitude] })
+
+      dispatch(loadData(latitude, longitude))
+    }
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(successUserGeoposition, () => { });
+    }
+  }, [])
 
   useEffect(() => {
     if (pointCoords) {
@@ -66,15 +82,10 @@ const WeatherMap = () => {
                     balloonContentHeader: pointData.name,
                     balloonContentBody: makeBaloonContent(pointData.main, pointData.weather[0], pointData.dt)
                   })
-
-                  // await fetch('../constants/city.list.json')
-                  // .then(response => {console.log(response)})
-
                 }}
               />
             )
             : null}
-
         </Map>
       </YMaps>
     </div>

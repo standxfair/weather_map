@@ -1,4 +1,4 @@
-import { PUSH_HISTORY, DELETE_HISTORY_ITEM } from '../constants/history';
+import { PUSH_HISTORY, DELETE_HISTORY_ITEM, CLEAR_HISTORY } from '../constants/history';
 
 export const putHistoryData = (data) => {
   return {
@@ -11,5 +11,12 @@ export const deleteHistoryItem = (data) => {
   return {
     type: DELETE_HISTORY_ITEM,
     payload: [data]
+  }
+}
+
+export const clearHistory = () => {
+  return {
+    type: CLEAR_HISTORY,
+    payload: []
   }
 }

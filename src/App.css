@@ -6,12 +6,12 @@
 
 .info {
   padding: 1rem;
-  flex: 2;
+  flex: 1;
 }
 
 .info__card {
   position: relative;
-  width: 40%;
+  width: 60%;
   background-color: #ffffff;
   padding: 1rem;
 }
@@ -45,11 +45,14 @@
 .history {
   padding: 1rem;
   flex: 1;
+  text-align: right;
 }
 
 .history>ul {
   list-style: none;
   line-height: 1.4rem;
+  margin: 0;
+  padding: 0;
 }
 
 .history__item {
@@ -69,6 +72,13 @@
 
 .history>ul>li {
   margin: 1rem;
+}
+
+.history__clear_all {
+  padding-right: 1rem;
+  text-decoration: underline;
+  color: #445ff8;
+  cursor: pointer;
 }
 
 .yamap {
